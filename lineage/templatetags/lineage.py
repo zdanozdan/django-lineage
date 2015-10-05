@@ -89,14 +89,13 @@ class AncestorNode(template.Node):
 
     def render(self, context):
         # Get the path of the current page (requires that "request" be
-        # in the context)
-        current_path = context['request'].path
-
-        path = self.get_path(context)
+        # in the context)        
+        current_path = urllib.unquote(context['request'].path)
+        path = urllib.unquote(self.get_path(context)).decode('utf-8')
 
         # If the provided path is found at the root of the current path
         # render the contents of this tag
-        if re.match(path, current_path):
+        if path == current_path:
             # Return either the contents of an ifancestor tag or the
             # ANCESTOR_PHRASE if it's an ancestor tag
             if self.contents is not None:
