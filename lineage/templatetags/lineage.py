@@ -1,6 +1,6 @@
 # This is where the cool stuff lives
 
-import re
+import re,urllib
 
 from django import template
 from django.template.defaulttags import url
